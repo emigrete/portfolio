@@ -3,45 +3,18 @@ import { motion } from 'framer-motion';
 
 export default function SpotifyWidget() {
   const [song, setSong] = useState(null);
-  const [isTokenExpired, setIsTokenExpired] = useState(false);
 
   useEffect(() => {
-    // Este token ya está vencido, pero lo dejamos de placeholder hasta hacer el backend
-    const token = 'BQBlayl2U8OAIJdZWYETeymJHSK067m185UCkZva4WKmP0fze4WOX9Hl56KvDQ79U-uIpmaN_N6Mk5d7JG0VNREPhZZx-4oeP2R8X0KPmCK4n2IqwNcbb--qQJPPin5HY59SR-Dy8undb495TQ4Q9eHEmneI0UXyQqstK9H1B10H7_y_zP5gHENLnwTfVYHbGGed8acny4LulGjWE7yydOKjgdUbrnvM5F0Fqtv5-HHNc6aw2UVcrsvp8L5lRaLCH9810U8tS8LLbhVO24rkIXzKsRjsx-bccANcym92jlkQ0RIt1w';
-
     async function getNowPlaying() {
-      if (isTokenExpired) return;
-
       try {
-        const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        });
-
-        // Si el token se venció (401), frenamos todo para no spamear la consola
-        if (res.status === 401) {
-          setIsTokenExpired(true);
-          setSong(null);
-          return;
-        }
-
-        if (res.status === 204 || res.status > 400) {
-          setSong(null);
-          return;
-        }
-
+        // Le preguntamos a nuestra propia API en Vercel
+        const res = await fetch('/api/spotify');
         const data = await res.json();
 
-        if (data.item && data.currently_playing_type === 'track' && data.is_playing) {
-          setSong({
-            title: data.item.name,
-            artist: data.item.artists.map(_artist => _artist.name).join(', '),
-            albumArt: data.item.album.images[0].url,
-            link: data.item.external_urls.spotify,
-          });
+        if (data.isPlaying) {
+          setSong(data);
         } else {
-          setSong(null); 
+          setSong(null); // Está pausado
         }
       } catch (error) {
         console.error("Error cargando Spotify:", error);
@@ -50,13 +23,10 @@ export default function SpotifyWidget() {
 
     getNowPlaying();
     
-    // Si el token expiró, no creamos el intervalo
-    if (isTokenExpired) return;
-
+    // Consultar cada 10 segundos
     const interval = setInterval(getNowPlaying, 10000);
     return () => clearInterval(interval);
-
-  }, [isTokenExpired]);
+  }, []);
 
   return (
     <motion.div
@@ -65,7 +35,7 @@ export default function SpotifyWidget() {
       transition={{ duration: 0.5 }}
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-zinc-900/95 backdrop-blur-xl border border-zinc-800 p-3 rounded-2xl shadow-2xl max-w-[280px]"
     >
-      {song && !isTokenExpired ? (
+      {song ? (
         // --- ESTADO ACTIVO ---
         <>
           <a href={song.link} target="_blank" rel="noreferrer" className="relative h-12 w-12 flex-shrink-0 rounded-full overflow-hidden border border-[#1DB954] group cursor-pointer">
@@ -95,7 +65,7 @@ export default function SpotifyWidget() {
           </div>
         </>
       ) : (
-        // --- ESTADO INACTIVO / PAUSADO ---
+        // --- ESTADO INACTIVO ---
         <>
           <div className="relative h-10 w-10 flex-shrink-0 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center">
              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-zinc-500">
