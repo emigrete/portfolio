@@ -1,4 +1,4 @@
-import NavBar from './components/NavBar'; 
+import BarraNavegadora from './components/BarraNavegadora'; 
 import Hero from './components/Hero';
 import About from './components/About';
 import Timeline from './components/Timeline';
@@ -10,7 +10,7 @@ import SpotifyWidget from './components/SpotifyWidget'; // <-- LO IMPORTÁS ACÁ
 function App() {
   return (
     <div className="min-h-screen selection:bg-violet-500/30 selection:text-violet-200">
-      <NavBar />
+      <BarraNavegadora />
       <main className="max-w-6xl mx-auto px-6 md:px-12">
         <Hero />
         <About />
