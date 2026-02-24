@@ -44,7 +44,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p variants={itemVariants} className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-10 font-light leading-relaxed">
-            Soy <span className="text-zinc-200 font-medium">Teodoro Welyczko</span>. Construyo arquitecturas backend robustas y automatizo infraestructuras escalables. Transformo código en sistemas de alto rendimiento.
+            Soy <span className="text-zinc-200 font-medium">Teodoro Welyczko</span>. Construyo arquitecturas backend robustas y automatizo infraestructuras escalables. 
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
