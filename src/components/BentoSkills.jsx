@@ -1,5 +1,5 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { Server, Database, Cloud, Code2, MapPin, Terminal, Cpu, Braces } from 'lucide-react';
+import { Server, Database, Cloud, Code2, MapPin, Terminal, Cpu, Braces, Languages } from 'lucide-react';
 import { MouseEvent } from 'react';
 
 // Componente para el efecto de luz que sigue al mouse
@@ -81,7 +81,7 @@ export default function BentoSkills() {
               <h3 className="text-3xl font-bold mb-3 text-zinc-100">Cloud & DevOps</h3>
               <p className="text-zinc-400 text-sm mb-8 leading-relaxed font-light">Infraestructura como código y automatización continua. Diseño pipelines robustos para despliegues sin interrupciones.</p>
               <div className="flex flex-wrap gap-2">
-                {['Docker', 'Kubernetes', 'AWS', 'Terraform', 'Ansible', 'CI/CD Pipelines', 'Linux'].map(tech => (
+                {['Docker', 'Kubernetes', 'AWS', 'Terraform', 'Ansible', 'GitHub Actions', 'Linux'].map(tech => (
                   <span key={tech} className="px-4 py-2 bg-zinc-900/80 border border-zinc-800 rounded-lg text-xs font-mono text-zinc-300 shadow-sm backdrop-blur-md">
                     {tech}
                   </span>
@@ -153,24 +153,50 @@ export default function BentoSkills() {
           </motion.div>
         </motion.div>
 
+        {/* Tarjeta Idiomas */}
+        <motion.div variants={itemVariants} className="md:col-span-2 h-full">
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className="glass-card rounded-3xl p-6 flex flex-col justify-between group h-full relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="p-3 bg-amber-500/10 w-fit rounded-xl border border-amber-500/20 mb-4">
+              <Languages size={24} className="text-amber-400 group-hover:scale-110 transition-transform" />
+            </div>
+            <div>
+              <h3 className="font-bold mb-3 text-zinc-100 text-lg">Idiomas</h3>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-zinc-300 font-mono">Español</p>
+                  <span className="text-[10px] px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded font-mono">Nativo</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-zinc-300 font-mono">English</p>
+                  <span className="text-[10px] px-2 py-0.5 bg-zinc-800 border border-zinc-700 text-zinc-300 rounded font-mono">B2 · Cambridge</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+
         {/* Tarjeta Ubicación */}
-        <motion.div variants={itemVariants} className="md:col-span-4 h-full">
-          <motion.div 
+        <motion.div variants={itemVariants} className="md:col-span-2 h-full">
+          <motion.div
             whileHover={{ scale: 0.99 }}
             className="glass-card rounded-3xl p-6 flex items-center justify-between border-violet-500/20 overflow-hidden relative h-full"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 via-transparent to-cyan-500/5 opacity-50" />
-            <div className="flex items-center gap-5 relative z-10">
+            <div className="flex items-center gap-4 relative z-10">
               <div className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800 shadow-inner">
                 <MapPin size={24} className="text-violet-400" />
               </div>
               <div>
-                <h3 className="font-bold text-zinc-100 text-lg">Base de Operaciones</h3>
-                <p className="text-sm text-zinc-400 font-mono mt-1">Don Torcuato, Buenos Aires, AR</p>
+                <h3 className="font-bold text-zinc-100 text-sm">Base de Operaciones</h3>
+                <p className="text-xs text-zinc-400 font-mono mt-1">Don Torcuato, BsAs, AR</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 relative z-10 mr-4">
-               <span className="text-xs font-mono text-cyan-400/80 hidden sm:block">ESTADO: ONLINE</span>
+            <div className="flex items-center gap-2 relative z-10">
+               <span className="text-xs font-mono text-cyan-400/80 hidden sm:block">ONLINE</span>
                <div className="h-3 w-3 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_15px_rgba(34,211,238,0.6)]"></div>
             </div>
           </motion.div>

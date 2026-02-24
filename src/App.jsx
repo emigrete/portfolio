@@ -5,7 +5,6 @@ import Timeline from './components/Timeline';
 import BentoSkills from './components/BentoSkills';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
-import SpotifyWidget from './components/SpotifyWidget'; // <-- LO IMPORTÁS ACÁ
 
 function App() {
   return (
@@ -20,8 +19,6 @@ function App() {
       </main>
       <Footer />
       
-      {/* LO RENDERIZÁS AFUERA DEL MAIN PARA QUE QUEDE FLOTANDO */}
-      <SpotifyWidget /> 
     </div>
   );
 }

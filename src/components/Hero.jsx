@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Terminal, ChevronRight, Eye } from 'lucide-react';
+import { Github, Linkedin, Terminal, ChevronRight, Eye, Mail } from 'lucide-react';
 import CVModal from './CVModal'; // <-- IMPORTAMOS EL COMPONENTE NUEVO
 
 export default function Hero() {
@@ -71,6 +71,9 @@ export default function Hero() {
             </a>
             <a href="https://linkedin.com/in/teodoro-welyczko-809624270" target="_blank" rel="noreferrer" className="p-3 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300 backdrop-blur-sm text-zinc-400">
               <Linkedin size={22} />
+            </a>
+            <a href="mailto:teodorowelyczko@gmail.com" className="p-3 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-400/10 transition-all duration-300 backdrop-blur-sm text-zinc-400">
+              <Mail size={22} />
             </a>
           </motion.div>
 
